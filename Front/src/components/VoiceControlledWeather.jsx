@@ -2,10 +2,37 @@ import { useState, useEffect } from 'react';
 import { speak } from '../service/speak';
 import postGeoloc from '../service/postGeoloc';
 
+
 function VoiceControlledWeather() {
   const [weather, setWeather] = useState(null);
+  const [isListening, setIsListening] = useState(false);
+
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+
+  recognition.continuous = false; // Arrête l'écoute après la première reconnaissance
+  recognition.lang = 'fr-FR'; // Langue française
+
+  useEffect(() => {
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript.toLowerCase();
+      console.log('Transcript:', transcript);
+      if (transcript.includes('météo')) {
+        getWeather();
+      }
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    // Démarrer l'écoute lors du chargement du composant
+    recognition.start();
+  }, []); // Ajouter des dépendances si nécessaire
 
   const getWeather = async () => {
+    setIsListening(false); // Stop listening when processing the command
     const weatherData = await postGeoloc();
     if (weatherData) {
       setWeather({
@@ -23,9 +50,20 @@ function VoiceControlledWeather() {
     }
   };
 
+  const toggleListening = () => {
+    setIsListening(!isListening);
+    if (isListening) {
+      recognition.stop();
+    } else {
+      recognition.start();
+    }
+  };
+
   return (
     <div>
-      <button onClick={getWeather}>Demander la météo</button>
+      <button onClick={toggleListening}>
+        {isListening ? 'Arrêter l’écoute' : 'Écouter'}
+      </button>
       {weather && (
         <div>
           <h3>Météo à {weather.name}</h3>
@@ -38,6 +76,7 @@ function VoiceControlledWeather() {
 }
 
 export default VoiceControlledWeather;
+
 
 // const SpeechRecognition =
 //   window.SpeechRecognition || window.webkitSpeechRecognition;
