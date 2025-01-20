@@ -18,7 +18,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className='homepage'>
+    <div className=''>
       <Header login={login} onLogout={handleLogout} />
       {login ? (
         <HomeContent username={login} />

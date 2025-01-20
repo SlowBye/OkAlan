@@ -1,0 +1,62 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  position: relative; }
+  
+.navbar-logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333; }
+  
+.navbar-menu {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease; }
+  
+.navbar-menu a,
+.login-btn {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  padding: 8px 12px; }
+  
+.login-btn {
+  background: none;
+  border: 1px solid #333;
+  border-radius: 5px;
+  cursor: pointer; }
+  
+.login-btn:hover {
+  background: #333;
+  color: #fff; }
+  
+/* Bouton du menu hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer; }
+  
+/* Style pour téléphone */
+@media (max-width: 768px) {
+  .navbar-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: transparent;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transform: translateX(100%); }
+    .navbar-menu.open {
+      transform: translateX(0); }
+  .menu-toggle {
+    display: block; } }

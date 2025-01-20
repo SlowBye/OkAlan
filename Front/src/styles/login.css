@@ -1,0 +1,65 @@
+
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; }
+      
+.form-card {
+    background-color: #F1F1F1;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center; }  
+    .form-card h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        color: #333; }
+    .form-card p {
+        margin-bottom: 20px;
+        color: #666; }
+
+.form-tabs {
+    display: flex;
+    margin-bottom: 25px; }
+    .form-tabs button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        margin: 2px;
+        cursor: pointer; }
+        .form-tabs button.active {
+            background: #333;
+            color: #fff; }
+ 
+.form-group {
+    margin-bottom: 15px;
+    text-align: left; }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #333; }
+        .form-group input {
+            width: 95%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px; }
+  
+.form-btn {
+    width: 100%;
+    padding: 11px;
+    margin-top: 10px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer; }
+    .form-btn:hover {
+        background: #333; }
+  
+        
