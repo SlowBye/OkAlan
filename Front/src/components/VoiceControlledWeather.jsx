@@ -26,9 +26,6 @@ function VoiceControlledWeather() {
     recognition.onend = () => {
       setIsListening(false);
     };
-
-    // Démarrer l'écoute lors du chargement du composant
-    recognition.start();
   }, []); // Ajouter des dépendances si nécessaire
 
   const getWeather = async () => {
