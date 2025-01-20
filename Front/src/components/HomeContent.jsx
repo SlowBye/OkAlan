@@ -1,3 +1,4 @@
+import VoiceControlledWeather from './VoiceControlledWeather';
 import VoiceRecognition from './VoiceRecognition';
 
 const HomeContent = ({ username }) => {
@@ -9,6 +10,7 @@ const HomeContent = ({ username }) => {
 
         <h2>Reconnaissance Vocale</h2>
         <VoiceRecognition />
+        <VoiceControlledWeather />
       </div>
     )
   );
