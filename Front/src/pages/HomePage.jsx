@@ -11,9 +11,15 @@ const HomePage = () => {
     setLogin(username);
     setPassword(password);
   };
+
+  const handleLogout = () => {
+    setLogin('');
+    setPassword('');
+  };
+
   return (
-    <div>
-      <Header />
+    <div className='homepage'>
+      <Header login={login} onLogout={handleLogout} />
       {login ? (
         <HomeContent username={login} />
       ) : (
