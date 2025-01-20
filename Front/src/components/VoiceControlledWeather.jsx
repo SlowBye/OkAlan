@@ -31,16 +31,18 @@ function VoiceControlledWeather() {
   const getWeather = async () => {
     setIsListening(false); // Stop listening when processing the command
     const weatherData = await postGeoloc();
+    console.log('Weather data:', weatherData);
     if (weatherData) {
       setWeather({
         name: weatherData.name,
-        temperature: weatherData.temp,
-        description: weatherData.description,
+        temperature: weatherData.temperature,
+        description: weatherData.weather,
       });
 
-      const message = `La température à ${weatherData.name} est de ${weatherData.temp} degrés Celsius avec comme condition ${weatherData.description}.`;
+      const message = `La température à ${weatherData.name} est de ${weatherData.temperature} degrés Celsius avec comme condition ${weatherData.weather}.`;
       speak(message);
     } else {
+      console.log(weatherData)
       speak(
         "Je suis désolé, je n'ai pas pu récupérer les informations météorologiques."
       );
