@@ -1,4 +1,4 @@
-const isTestMode = false; // Change this to false to use the backend
+const isTestMode = true; // Change this to false to use the backend
 
 export const login = async (username, password) => {
   if (isTestMode) {
