@@ -1,27 +1,34 @@
 import { useState } from 'react';
 import VoiceRecognition from './VoiceRecognition';
 import VoiceControlledWeather from './VoiceControlledWeather';
+import VoiceControlledJoke from './VoiceControlledJoke'; // Importez le nouveau composant de blague
 
 const HomeContent = ({ username }) => {
   const [isListening, setIsListening] = useState(false);
-  const [transcripts, setTranscripts] = useState('');
+  const [transcripts, setTranscripts] = useState([]);
+  const [activeFeature, setActiveFeature] = useState(null);
 
   const handleListeningToggle = () => {
     if (!isListening) {
-      setTranscripts([]); // Effacer les transcriptions précédentes avant de recommencer l'écoute
+      setTranscripts([]);
+      setActiveFeature(null); // Réinitialiser la fonctionnalité active lorsque l'écoute est relancée
     }
     setIsListening(!isListening);
   };
 
   const handleTranscriptReceived = (receivedTranscript) => {
     const transcript = receivedTranscript.toLowerCase();
-    // Détecter le mot-clé "écris" et stocker la transcription suivante
     if (transcript.startsWith('écris ')) {
-      const textToWrite = capitalizeFirstLetter(transcript.slice(6)); // Supprimer le mot "écris" du début et met une majuscule
+      const textToWrite = capitalizeFirstLetter(transcript.slice(6));
       setTranscripts((prev) => [...prev, textToWrite]);
     } else if (transcript.includes('météo')) {
       setActiveFeature('weather');
-    } // Vous pouvez ajouter plus de conditions ici pour d'autres fonctionnalités
+    } else if (
+      transcript.includes('dis-moi une blague') ||
+      transcript.includes('raconte une blague')
+    ) {
+      setActiveFeature('joke');
+    }
   };
 
   // Fonction pour capitaliser la première lettre de la phrase
@@ -29,7 +36,6 @@ const HomeContent = ({ username }) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  const [activeFeature, setActiveFeature] = useState(null);
   return (
     <section className='user'>
       <div className='user-bonjour'>
@@ -48,17 +54,11 @@ const HomeContent = ({ username }) => {
         isListening={isListening}
         onTranscriptReceived={handleTranscriptReceived}
       />
-      {transcripts.length > 0 && (
-        <div className='transcription-list'>
-          <h3>Transcriptions:</h3>
-          <ul>
-            {transcripts.map((transcript, index) => (
-              <li key={index}>{transcript}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {transcripts.map((transcript, index) => (
+        <div key={index}>{transcript}</div>
+      ))}
       {activeFeature === 'weather' && <VoiceControlledWeather />}
+      {activeFeature === 'joke' && <VoiceControlledJoke />}
     </section>
   );
 };

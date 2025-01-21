@@ -1,4 +1,4 @@
-const isTestMode = false; 
+const isTestMode = false;
 
 export const login = async (username, password) => {
   if (isTestMode) {
@@ -9,10 +9,9 @@ export const login = async (username, password) => {
         } else {
           reject(new Error('Invalid username or password'));
         }
-      }, 1000); 
+      }, 1000);
     });
   } else {
-    
     const url = 'http://localhost:3000/auth/connexion';
 
     const response = await fetch(url, {
@@ -31,5 +30,4 @@ export const login = async (username, password) => {
       throw new Error('Login failed');
     }
   }
-
 };
