@@ -1,55 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
-recognition.continuous = true; // Écoute continue
-recognition.lang = 'fr-FR'; // Définir la langue à Français
-
-function VoiceRecognition() {
-  const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState('');
-
+function VoiceRecognition({ isListening, onTranscriptReceived }) {
   useEffect(() => {
-    recognition.onstart = () => {
-      console.log('La reconnaissance vocale est activée.');
-      setIsListening(true);
-    };
-
-    recognition.onend = () => {
-      console.log('La reconnaissance vocale est désactivée.');
-      setIsListening(false);
-    };
+    recognition.continuous = false;
+    recognition.lang = 'fr-FR';
 
     recognition.onresult = (event) => {
-      const current = event.resultIndex;
-      const transcript = event.results[current][0].transcript;
-      console.log(`Transcription actuelle : ${transcript}`);
-      setTranscript(transcript);
+      const transcript = event.results[0][0].transcript;
+      onTranscriptReceived(transcript);
     };
 
-    return () => {
-      recognition.stop();
-    };
-  }, []);
-
-  const toggleListening = () => {
     if (isListening) {
-      recognition.stop();
-    } else {
       recognition.start();
+    } else {
+      recognition.stop();
     }
-  };
 
-  return (
-    <div className="voice-recognition-container">
-      <button className="voice-button" onClick={toggleListening}>
-        {isListening ? 'Arrêter l’écoute' : 'Commencer à écouter'}
-      </button>
-      <div className="transcription">{transcript}</div>
-    </div>
-  );
+    return () => recognition.stop();
+  }, [isListening]);
+
+  return null;
 }
 
 export default VoiceRecognition;
