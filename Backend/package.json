@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "blagues-api": "^2.1.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "node-fetch": "^3.3.2"
   }
 }
