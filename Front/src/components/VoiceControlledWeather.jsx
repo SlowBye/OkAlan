@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react';
 import { speak } from '../service/speak';
 import postGeoloc from '../service/postGeoloc';
 
-
 function VoiceControlledWeather() {
   const [weather, setWeather] = useState(null);
-  const [isListening, setIsListening] = useState(false);
 
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const recognition = new SpeechRecognition();
 
   recognition.continuous = false; // Arrête l'écoute après la première reconnaissance
   recognition.lang = 'fr-FR'; // Langue française
 
   useEffect(() => {
+    // Démarre la reconnaissance vocale immédiatement lorsque le composant est chargé
+    recognition.start();
+
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript.toLowerCase();
       console.log('Transcript:', transcript);
@@ -24,13 +24,13 @@ function VoiceControlledWeather() {
     };
 
     recognition.onend = () => {
-      setIsListening(false);
+      // Optionnellement, redémarrez l'écoute ou gérez la fin de l'écoute ici
     };
     // eslint-disable-next-line
   }, []); // Ajouter des dépendances si nécessaire
 
   const getWeather = async () => {
-    setIsListening(false); // Stop listening when processing the command
+    // Suppression de setIsListening car il n'est plus nécessaire
     const weatherData = await postGeoloc();
     console.log('Weather data:', weatherData);
     if (weatherData) {
@@ -50,20 +50,8 @@ function VoiceControlledWeather() {
     }
   };
 
-  const toggleListening = () => {
-    setIsListening(!isListening);
-    if (isListening) {
-      recognition.stop();
-    } else {
-      recognition.start();
-    }
-  };
-
   return (
     <div className="voice-weather-container">
-      <button className="voice-button" onClick={toggleListening}>
-        {isListening ? 'Arrêter l’écoute' : 'Écouter'}
-      </button>
       {weather && (
         <div className="voice-weather-info">
           <h3>Météo à {weather.name}</h3>
@@ -75,8 +63,85 @@ function VoiceControlledWeather() {
   );
 }
 
-
 export default VoiceControlledWeather;
+// import { useState, useEffect } from 'react';
+// import { speak } from '../service/speak';
+// import postGeoloc from '../service/postGeoloc';
+
+
+// function VoiceControlledWeather() {
+//   const [weather, setWeather] = useState(null);
+//   const [isListening, setIsListening] = useState(false);
+
+//   const SpeechRecognition =
+//     window.SpeechRecognition || window.webkitSpeechRecognition;
+//   const recognition = new SpeechRecognition();
+
+//   recognition.continuous = false; // Arrête l'écoute après la première reconnaissance
+//   recognition.lang = 'fr-FR'; // Langue française
+
+//   useEffect(() => {
+//     recognition.onresult = (event) => {
+//       const transcript = event.results[0][0].transcript.toLowerCase();
+//       console.log('Transcript:', transcript);
+//       if (transcript.includes('météo')) {
+//         getWeather();
+//       }
+//     };
+
+//     recognition.onend = () => {
+//       setIsListening(false);
+//     };
+//   }, []); // Ajouter des dépendances si nécessaire
+
+//   const getWeather = async () => {
+//     setIsListening(false); // Stop listening when processing the command
+//     const weatherData = await postGeoloc();
+//     console.log('Weather data:', weatherData);
+//     if (weatherData) {
+//       setWeather({
+//         name: weatherData.name,
+//         temperature: weatherData.temperature,
+//         description: weatherData.weather,
+//       });
+
+//       const message = `La température à ${weatherData.name} est de ${weatherData.temperature} degrés Celsius avec comme condition ${weatherData.weather}.`;
+//       speak(message);
+//     } else {
+//       console.log(weatherData)
+//       speak(
+//         "Je suis désolé, je n'ai pas pu récupérer les informations météorologiques."
+//       );
+//     }
+//   };
+
+//   const toggleListening = () => {
+//     setIsListening(!isListening);
+//     if (isListening) {
+//       recognition.stop();
+//     } else {
+//       recognition.start();
+//     }
+//   };
+
+//   return (
+//     <div className="voice-weather-container">
+//       <button className="voice-button" onClick={toggleListening}>
+//         {isListening ? 'Arrêter l’écoute' : 'Écouter'}
+//       </button>
+//       {weather && (
+//         <div className="voice-weather-info">
+//           <h3>Météo à {weather.name}</h3>
+//           <p>Température : {weather.temperature} °C</p>
+//           <p>Conditions : {weather.description}</p>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
+
+// export default VoiceControlledWeather;
 
 
 // const SpeechRecognition =
