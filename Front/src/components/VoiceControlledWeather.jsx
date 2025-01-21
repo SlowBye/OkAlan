@@ -26,6 +26,7 @@ function VoiceControlledWeather() {
     recognition.onend = () => {
       setIsListening(false);
     };
+    // eslint-disable-next-line
   }, []); // Ajouter des dépendances si nécessaire
 
   const getWeather = async () => {
