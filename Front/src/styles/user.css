@@ -1,0 +1,128 @@
+.user {
+    max-width: 1000px;
+    margin: 0 auto; }
+  
+.user-bonjour h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 30px; }
+    .user-bonjour span {
+      color: #0078d7; 
+      font-weight: bold;}
+  
+.user-vocal {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.27);
+    overflow: hidden; }
+    .vocal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        cursor: pointer;
+        font-size: 15px; }
+        .vocal-header h2 {
+            margin: 0; }
+            .vocal-header:hover {
+                background-color: #f5f7f8; }
+        .toggle-button {
+            background: #fff;
+            height: 30px;
+            width: 20px;
+            border-radius: 50px;
+            font-size: 21px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center; }
+            .toggle-button:hover {
+                background: #f5f7f8; }
+    .vocal-content {
+        padding: 20px;
+        background-color: #f5f7f8;
+        font-size: 16px;
+        line-height: 1.5;
+        animation: slideDown 0.3s ease-out; }
+  
+@keyframes slideDown {
+    from {
+        max-height: 0;
+        opacity: 0; }
+    to {
+        max-height: 1000px;
+        opacity: 1; } }
+  
+
+
+/* Voice Recognition */
+.voice-recognition-container,
+.voice-weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    .voice-button {
+        background: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease; }
+        .voice-button:hover {
+            background: #0056b3;
+            transform: translateY(-2px); }
+        .voice-button:active {
+            background: #003f7f; 
+            transform: translateY(0); }
+  
+    .transcription {
+        margin-top: 20px;
+        padding: 15px 20px;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        font-size: 1rem;
+        color: #555;
+        text-align: center;
+        word-wrap: break-word; }
+        /* Effet visuel pour transcription vide */
+        .transcription:empty::before {
+            content: 'Aucune transcription pour le moment...';
+            color: #aaa;
+            font-style: italic; }
+  
+@media (max-width: 768px) {
+    .voice-recognition-container {
+      padding: 15px; }
+    .voice-button {
+      font-size: 0.9rem;
+      padding: 10px 16px; }
+    .transcription {
+      font-size: 0.9rem; } }
+
+
+
+/* Voice Controlled Weather */
+.voice-weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    .voice-weather-info {
+        margin-top: 20px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        width: 320px;
+        text-align: center; }
+        .voice-weather-info h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #0078d7;
+            margin-top: 5px; }
+        .voice-weather-info p {
+            font-size: 15px;
+            margin: 6px 0;
+            color: #555; }
+  

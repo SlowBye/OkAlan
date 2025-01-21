@@ -60,20 +60,21 @@ function VoiceControlledWeather() {
   };
 
   return (
-    <div>
-      <button onClick={toggleListening}>
+    <div className="voice-weather-container">
+      <button className="voice-button" onClick={toggleListening}>
         {isListening ? 'Arrêter l’écoute' : 'Écouter'}
       </button>
       {weather && (
-        <div>
+        <div className="voice-weather-info">
           <h3>Météo à {weather.name}</h3>
-          <p>Température: {weather.temperature} °C</p>
-          <p>Conditions: {weather.description}</p>
+          <p>Température : {weather.temperature} °C</p>
+          <p>Conditions : {weather.description}</p>
         </div>
       )}
     </div>
   );
 }
+
 
 export default VoiceControlledWeather;
 

@@ -14,7 +14,6 @@ const LoginForm = ({ onLogin }) => {
     } catch (error) {
       console.error('Login failed:', error);
     }
-    console.log('username:', username, 'password:', password);
   };
 
   return (
