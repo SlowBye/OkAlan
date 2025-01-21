@@ -4,6 +4,7 @@
 import './App.css';
 import './styles/login.css';
 import './styles/header.css';
+import './styles/user.css';
 import HomePage from './pages/HomePage';
 
 function App() {

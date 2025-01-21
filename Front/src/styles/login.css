@@ -31,7 +31,7 @@
         margin: 2px;
         cursor: pointer; }
         .form-tabs button.active {
-            background: #333;
+            background: #0078d7; 
             color: #fff; }
  
 .form-group {
@@ -53,13 +53,13 @@
     width: 100%;
     padding: 11px;
     margin-top: 10px;
-    background: #000;
+    background: #0078d7;
     color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer; }
     .form-btn:hover {
-        background: #333; }
+        background: #0078d7; }
   
         

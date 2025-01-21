@@ -43,11 +43,11 @@ function VoiceRecognition() {
   };
 
   return (
-    <div>
-      <button onClick={toggleListening}>
+    <div className="voice-recognition-container">
+      <button className="voice-button" onClick={toggleListening}>
         {isListening ? 'Arrêter l’écoute' : 'Commencer à écouter'}
       </button>
-      <p>Transcription : {transcript}</p>
+      <div className="transcription">{transcript}</div>
     </div>
   );
 }
