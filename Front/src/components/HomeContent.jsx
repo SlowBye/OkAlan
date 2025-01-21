@@ -1,5 +1,6 @@
 import VoiceControlledWeather from './VoiceControlledWeather';
 import VoiceRecognition from './VoiceRecognition';
+import { useState } from 'react';
 
 const HomeContent = ({ username }) => {
   // Etat pour ouvrir ou fermer les sections
