@@ -9,9 +9,9 @@ const HomeContent = ({ username }) => {
   const [activeFeature, setActiveFeature] = useState(null);
 
   const handleListeningToggle = () => {
-    if (!isListening) {
+    if (isListening) {
       setTranscripts([]);
-      setActiveFeature(null); // Réinitialiser la fonctionnalité active lorsque l'écoute est relancée
+      setActiveFeature(null); // S'assurer que cela se fait avant de basculer l'état d'écoute.
     }
     setIsListening(!isListening);
   };
