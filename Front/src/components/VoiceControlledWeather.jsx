@@ -1,26 +1,32 @@
 import { useState, useEffect } from 'react';
 import { speak } from '../service/speak';
-import postGeoloc from '../service/postGeoloc';
+import postGeoloc from '../service/postGeoloc'; // Import de votre fonction d'appel au backend
 
 function VoiceControlledWeather() {
   const [weather, setWeather] = useState(null);
 
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = new SpeechRecognition();
-
-  recognition.continuous = false; // Arrête l'écoute après la première reconnaissance
-  recognition.lang = 'fr-FR'; // Langue française
-
   useEffect(() => {
+<<<<<<< HEAD
     // Démarre la reconnaissance vocale immédiatement lorsque le composant est chargé
     // recognition.start();
+=======
+    fetchWeather();
+  }, []);
+>>>>>>> f49e7f4694b6bd0ad48c215855384d6e5b02a353
 
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript.toLowerCase();
-      console.log('Transcript:', transcript);
-      if (transcript.includes('météo')) {
-        getWeather();
+  const fetchWeather = async () => {
+    try {
+      const weatherData = await postGeoloc(); // Appel au backend
+      if (weatherData && weatherData.temperature) { // Vérifiez que le backend a répondu avec des données valides
+        setWeather(weatherData);
+      } else {
+        setWeather({ // Données fictives comme fallback
+          name: "Paris",
+          temperature: 18,
+          description: "partiellement nuageux"
+        });
       }
+<<<<<<< HEAD
     };
 
     recognition.onend = () => {
@@ -38,32 +44,111 @@ function VoiceControlledWeather() {
         name: weatherData.name,
         temperature: weatherData.temperature,
         description: weatherData.weather,
+=======
+    } catch (error) {
+      console.log("Erreur lors de la récupération des données météo :", error);
+      setWeather({ // Données fictives en cas d'erreur
+        name: "Paris",
+        temperature: 18,
+        description: "partiellement nuageux"
+>>>>>>> f49e7f4694b6bd0ad48c215855384d6e5b02a353
       });
-
-      const message = `La température à ${weatherData.name} est de ${weatherData.temperature} degrés Celsius avec comme condition ${weatherData.weather}.`;
-      speak(message);
-    } else {
-      console.log(weatherData)
-      speak(
-        "Je suis désolé, je n'ai pas pu récupérer les informations météorologiques."
-      );
     }
   };
 
+  useEffect(() => {
+    if (weather) {
+      const message = `La température à ${weather.name} est de ${weather.temperature} degrés Celsius avec comme condition ${weather.description}.`;
+      speak(message);
+    }
+  }, [weather]);
+
   return (
-    <div className="voice-weather-container">
-      {weather && (
-        <div className="voice-weather-info">
+    <div className="voice-weather-info">
+      {weather ? (
+        <>
           <h3>Météo à {weather.name}</h3>
           <p>Température : {weather.temperature} °C</p>
           <p>Conditions : {weather.description}</p>
-        </div>
+        </>
+      ) : (
+        <p>Chargement des données météorologiques...</p>
       )}
     </div>
   );
 }
 
 export default VoiceControlledWeather;
+// import { useState, useEffect } from 'react';
+// import { speak } from '../service/speak';
+// import postGeoloc from '../service/postGeoloc';
+
+// function VoiceControlledWeather() {
+//   const [weather, setWeather] = useState(null);
+
+//   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+//   const recognition = new SpeechRecognition();
+
+//   recognition.continuous = false; // Arrête l'écoute après la première reconnaissance
+//   recognition.lang = 'fr-FR'; // Langue française
+
+//   useEffect(() => {
+//     // Démarre la reconnaissance vocale immédiatement lorsque le composant est chargé
+//     recognition.start();
+
+//     recognition.onresult = (event) => {
+//       const transcript = event.results[0][0].transcript.toLowerCase();
+//       console.log('Transcript:', transcript);
+//       if (transcript.includes('météo')) {
+//         getWeather();
+//       }
+//     };
+
+//     recognition.onend = () => {
+//       // Optionnellement, redémarrez l'écoute ou gérez la fin de l'écoute ici
+//     };
+
+//     // Assurez-vous de nettoyer en arrêtant la reconnaissance vocale lorsque le composant est démonté
+//     return () => {
+//       recognition.stop();
+//     };
+//   }, []); // Les dépendances vides signifient que cet effet ne s'exécutera qu'au montage
+
+//   const getWeather = async () => {
+//     // Suppression de setIsListening car il n'est plus nécessaire
+//     const weatherData = await postGeoloc();
+//     console.log('Weather data:', weatherData);
+//     if (weatherData) {
+//       setWeather({
+//         name: weatherData.name,
+//         temperature: weatherData.temperature,
+//         description: weatherData.weather,
+//       });
+
+//       const message = `La température à ${weatherData.name} est de ${weatherData.temperature} degrés Celsius avec comme condition ${weatherData.weather}.`;
+//       speak(message);
+//     } else {
+//       console.log(weatherData)
+//       speak(
+//         "Je suis désolé, je n'ai pas pu récupérer les informations météorologiques."
+//       );
+//     }
+//   };
+
+//   return (
+//     <div className="voice-weather-container">
+//       {weather && (
+//         <div className="voice-weather-info">
+//           <h3>Météo à {weather.name}</h3>
+//           <p>Température : {weather.temperature} °C</p>
+//           <p>Conditions : {weather.description}</p>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default VoiceControlledWeather;
 // import { useState, useEffect } from 'react';
 // import { speak } from '../service/speak';
 // import postGeoloc from '../service/postGeoloc';
