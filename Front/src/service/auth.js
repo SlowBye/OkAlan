@@ -1,4 +1,4 @@
-const isTestMode = true;
+const isTestMode = false;
 
 export const login = async (username, password) => {
   if (isTestMode) {

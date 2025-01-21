@@ -18,14 +18,16 @@ const HomeContent = ({ username }) => {
 
   const handleTranscriptReceived = (receivedTranscript) => {
     const transcript = receivedTranscript.toLowerCase();
-    if (transcript.startsWith('écris ')) {
+    if (transcript.startsWith('écris ') || transcript.startsWith('écris-moi')) {
       const textToWrite = capitalizeFirstLetter(transcript.slice(6));
       setTranscripts((prev) => [...prev, textToWrite]);
     } else if (transcript.includes('météo')) {
       setActiveFeature('weather');
     } else if (
       transcript.includes('dis-moi une blague') ||
-      transcript.includes('raconte une blague')
+      transcript.includes('raconte une blague') ||
+      transcript.includes('blague') ||
+      transcript.includes('raconte moi une blague')
     ) {
       setActiveFeature('joke');
     }
