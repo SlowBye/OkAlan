@@ -10,6 +10,7 @@ function VoiceControlledJoke() {
   }, []);
 
   const fetchJokeData = async () => {
+    
     let jokeData = await fetchJoke();
     console.log(jokeData);
     if (!jokeData) {
