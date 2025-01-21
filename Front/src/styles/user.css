@@ -1,16 +1,16 @@
-.user {
+user {
     max-width: 1000px;
     margin: 0 auto; }
-  
+ 
 .user-bonjour h1 {
     text-align: center;
     font-size: 40px;
     font-weight: 400;
     margin-bottom: 30px; }
     .user-bonjour span {
-      color: #0078d7; 
+      color: #0078d7;
       font-weight: bold;}
-  
+ 
 .user-vocal {
     border-radius: 10px;
     margin-bottom: 20px;
@@ -45,7 +45,7 @@
         font-size: 16px;
         line-height: 1.5;
         animation: slideDown 0.3s ease-out; }
-  
+ 
 @keyframes slideDown {
     from {
         max-height: 0;
@@ -53,9 +53,18 @@
     to {
         max-height: 1000px;
         opacity: 1; } }
-  
-
-
+ 
+.voice-info {
+    margin-bottom: 30px;
+    color: #666; }
+    .voice-info p {
+        padding: 0;
+        font-size: 14px;
+        text-align: center;
+        margin: 2px;}
+ 
+ 
+ 
 /* Voice Recognition */
 .voice-recognition-container,
 .voice-weather-container {
@@ -72,9 +81,9 @@
             background: #0056b3;
             transform: translateY(-2px); }
         .voice-button:active {
-            background: #003f7f; 
+            background: #003f7f;
             transform: translateY(0); }
-  
+ 
     .transcription {
         margin-top: 20px;
         padding: 15px 20px;
@@ -90,7 +99,7 @@
             content: 'Aucune transcription pour le moment...';
             color: #aaa;
             font-style: italic; }
-  
+ 
 @media (max-width: 768px) {
     .voice-recognition-container {
       padding: 15px; }
@@ -99,9 +108,9 @@
       padding: 10px 16px; }
     .transcription {
       font-size: 0.9rem; } }
-
-
-
+ 
+ 
+ 
 /* Voice Controlled Weather */
 .voice-weather-container {
     display: flex;
@@ -125,4 +134,37 @@
             font-size: 15px;
             margin: 6px 0;
             color: #555; }
-  
+ 
+ 
+ 
+/* Voice Controlled Jokes */
+.voice-joke-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px 25px 15px 25px;
+    width: auto; }
+    .voice-joke-info h4 {
+        margin: 0;
+        padding: 5px 0;
+        font-size: 15px;
+        color: #555; }
+        .voice-joke-info {
+            font-size: 24px;
+            color: #0078d7;
+            margin-right: auto;        
+            margin-bottom: 20px; }
+    .voice-joke-container p {
+        font-size: 17px;
+        margin: 2px 0;
+        text-align: left; }
+        .voice-joke-container p:first-of-type {
+            font-weight: bold;
+            color: #0078d7; }
+ 
+/* CSS */
