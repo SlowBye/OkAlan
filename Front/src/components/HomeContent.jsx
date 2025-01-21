@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import VoiceRecognition from './VoiceRecognition';
-import { useState } from 'react';
 import VoiceControlledWeather from './VoiceControlledWeather';
-import VoiceRecognition from './VoiceRecognition';
-import { useState } from 'react';
 
 const HomeContent = ({ username }) => {
   const [activeFeature, setActiveFeature] = useState(null); // Gère la fonctionnalité active

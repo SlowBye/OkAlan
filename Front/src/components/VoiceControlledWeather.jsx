@@ -13,7 +13,7 @@ function VoiceControlledWeather() {
 
   useEffect(() => {
     // Démarre la reconnaissance vocale immédiatement lorsque le composant est chargé
-    recognition.start();
+    // recognition.start();
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript.toLowerCase();
